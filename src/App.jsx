@@ -150,6 +150,7 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [connectOpen, setConnectOpen] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
+  const [resumePreviewOpen, setResumePreviewOpen] = useState(false);
   const [formStatus, setFormStatus] = useState("idle");
   const [activeSection, setActiveSection] = useState("about");
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -253,11 +254,12 @@ function App() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = connectOpen || resumeOpen ? "hidden" : "";
+    document.body.style.overflow = connectOpen || resumeOpen || resumePreviewOpen ? "hidden" : "";
     const closeOnEscape = (event) => {
       if (event.key === "Escape") {
         setConnectOpen(false);
         setResumeOpen(false);
+        setResumePreviewOpen(false);
       }
     };
     window.addEventListener("keydown", closeOnEscape);
@@ -265,7 +267,7 @@ function App() {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", closeOnEscape);
     };
-  }, [connectOpen, resumeOpen]);
+  }, [connectOpen, resumeOpen, resumePreviewOpen]);
   const handleSubmit = async (event) => {
     event.preventDefault();
     setFormStatus("sending");
@@ -706,15 +708,36 @@ function App() {
             <div className="resume-icon" aria-hidden="true">PDF</div>
             <Label>Résumé</Label>
             <h2 id="resume-title">How would you like to open it?</h2>
-            <p>Preview Shruthi’s resume in a new browser tab or save a PDF copy to your device.</p>
+            <p>View Shruthi’s resume directly in your browser or save a PDF copy to your device.</p>
             <div className="resume-actions">
-              <a className="resume-option resume-option--primary" href="/uploads/Shruthi_Gowri_Shankar_Resume.pdf" target="_blank" rel="noreferrer" onClick={() => setResumeOpen(false)}>
-                <span>View in browser</span><small>Opens in a new tab</small><b>↗</b>
-              </a>
+              <button className="resume-option resume-option--primary" type="button" onClick={() => { setResumeOpen(false); setResumePreviewOpen(true); }}>
+                <span>View in browser</span><small>Open an in-page preview</small><b>→</b>
+              </button>
               <a className="resume-option" href="/uploads/Shruthi_Gowri_Shankar_Resume.pdf" download="Shruthi_Gowri_Shankar_Resume.pdf" onClick={() => setResumeOpen(false)}>
                 <span>Download PDF</span><small>Save a copy to your device</small><b>↓</b>
               </a>
             </div>
+          </section>
+        </div>
+      )}
+
+      {resumePreviewOpen && (
+        <div className="resume-viewer-overlay" role="presentation" onMouseDown={(event) => {
+          if (event.target === event.currentTarget) setResumePreviewOpen(false);
+        }}>
+          <section className="resume-viewer" role="dialog" aria-modal="true" aria-labelledby="resume-viewer-title">
+            <header className="resume-viewer-header">
+              <div>
+                <span className="resume-viewer-badge">PDF</span>
+                <div><strong id="resume-viewer-title">Shruthi GowriShankar — Résumé</strong><small>Browser preview</small></div>
+              </div>
+              <div className="resume-viewer-actions">
+                <a href="/uploads/Shruthi_Gowri_Shankar_Resume.pdf" download="Shruthi_Gowri_Shankar_Resume.pdf">Download <span>↓</span></a>
+                <a href="/uploads/Shruthi_Gowri_Shankar_Resume.pdf" target="_blank" rel="noreferrer">New tab <span>↗</span></a>
+                <button type="button" aria-label="Close résumé preview" onClick={() => setResumePreviewOpen(false)}>×</button>
+              </div>
+            </header>
+            <iframe src="/uploads/Shruthi_Gowri_Shankar_Resume.pdf#view=FitH" title="Shruthi GowriShankar résumé PDF preview" />
           </section>
         </div>
       )}

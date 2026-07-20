@@ -526,7 +526,7 @@ main > .section, main > .contact { background-image: linear-gradient(oklch(58% .
 .resume-option {
   position: relative; display: flex; flex-direction: column; justify-content: center; min-height: 118px;
   padding: 20px 44px 20px 18px; border: 1px solid oklch(84% .012 250); border-radius: 13px;
-  color: var(--dark); background: white; transition: transform .2s, border-color .2s, box-shadow .2s;
+  color: var(--dark); text-align: left; background: white; font: inherit; cursor: pointer; transition: transform .2s, border-color .2s, box-shadow .2s;
 }
 .resume-option:hover { border-color: var(--blue); color: var(--dark); transform: translateY(-3px); box-shadow: 0 16px 28px -22px oklch(20% .06 250 / .5); }
 .resume-option--primary { color: white; border-color: var(--blue); background: var(--blue); }
@@ -534,6 +534,19 @@ main > .section, main > .contact { background-image: linear-gradient(oklch(58% .
 .resume-option span { font-size: 15px; font-weight: 750; }
 .resume-option small { margin-top: 5px; opacity: .72; font-size: 11px; line-height: 1.35; }
 .resume-option b { position: absolute; top: 18px; right: 18px; font-size: 18px; }
+.resume-viewer-overlay { position: fixed; inset: 0; z-index: 120; display: grid; place-items: center; padding: 22px; background: oklch(8% .02 260 / .82); backdrop-filter: blur(10px); }
+.resume-viewer { display: grid; grid-template-rows: auto minmax(0, 1fr); overflow: hidden; width: min(100%, 1040px); height: min(92vh, 880px); border: 1px solid oklch(78% .03 250 / .35); border-radius: 20px; background: oklch(18% .018 260); box-shadow: 0 40px 100px oklch(3% .03 260 / .7); animation: panel-in .25s ease-out; }
+.resume-viewer-header { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 13px 16px; border-bottom: 1px solid oklch(68% .04 250 / .22); color: white; background: linear-gradient(110deg, oklch(23% .03 255), oklch(17% .018 260)); }
+.resume-viewer-header > div:first-child { display: flex; align-items: center; gap: 11px; min-width: 0; }
+.resume-viewer-header > div:first-child > div { display: flex; min-width: 0; flex-direction: column; }
+.resume-viewer-header strong { overflow: hidden; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.resume-viewer-header small { margin-top: 2px; color: oklch(68% .02 250); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
+.resume-viewer-badge { display: grid; flex: none; place-items: center; width: 38px; height: 38px; border-radius: 10px; color: white; background: var(--blue); font-size: 9px; font-weight: 850; letter-spacing: .08em; }
+.resume-viewer-actions { display: flex; align-items: center; gap: 7px; }
+.resume-viewer-actions a, .resume-viewer-actions button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 36px; padding: 8px 12px; border: 1px solid oklch(68% .05 250 / .3); border-radius: 9px; color: oklch(88% .02 250); background: oklch(28% .025 255 / .72); font: inherit; font-size: 11px; font-weight: 700; cursor: pointer; transition: border-color .2s, background .2s, transform .2s; }
+.resume-viewer-actions a:hover, .resume-viewer-actions button:hover { color: white; border-color: oklch(67% .13 245); background: oklch(34% .05 250); transform: translateY(-1px); }
+.resume-viewer-actions button { width: 36px; padding: 0; font-size: 23px; font-weight: 350; }
+.resume-viewer iframe { width: 100%; height: 100%; border: 0; background: oklch(92% .006 250); }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
@@ -705,6 +718,14 @@ main > .section, main > .contact { background-image: linear-gradient(oklch(58% .
   .resume-icon { width: 54px; height: 68px; margin-right: 22px; }
   .resume-actions { grid-template-columns: 1fr; }
   .resume-option { min-height: 92px; }
+  .resume-viewer-overlay { align-items: end; padding: 0; }
+  .resume-viewer { width: 100%; height: 94vh; border-right: 0; border-bottom: 0; border-left: 0; border-radius: 18px 18px 0 0; }
+  .resume-viewer-header { align-items: flex-start; padding: 11px 12px; }
+  .resume-viewer-header > div:first-child { max-width: 48%; }
+  .resume-viewer-badge { display: none; }
+  .resume-viewer-actions { gap: 5px; }
+  .resume-viewer-actions a { padding: 8px; font-size: 0; }
+  .resume-viewer-actions a span { font-size: 15px; }
   .site-footer { padding: 58px 20px 22px; }
   .footer-grid { background-size: 38px 38px; }
   .footer-inner { grid-template-columns: 1fr 1fr; gap: 38px 24px; }
