@@ -154,6 +154,7 @@ function App() {
   const [activeSection, setActiveSection] = useState("about");
   const [scrollProgress, setScrollProgress] = useState(0);
   const [theme, setTheme] = useState("light");
+  const [contactVisible, setContactVisible] = useState(false);
 
   const closeMenu = () => setMenuOpen(false);
   const scrollToSection = (event, sectionId) => {
@@ -207,11 +208,18 @@ function App() {
     );
 
     document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+    const contact = document.getElementById("contact");
+    const contactObserver = new IntersectionObserver(
+      ([entry]) => setContactVisible(entry.isIntersecting),
+      { threshold: 0.12 },
+    );
+    if (contact) contactObserver.observe(contact);
     updateScroll();
     window.addEventListener("scroll", updateScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", updateScroll);
       revealObserver.disconnect();
+      contactObserver.disconnect();
     };
   }, []);
 
@@ -286,7 +294,7 @@ function App() {
       <header className="nav">
         <a className="brand" href="#top" onClick={(event) => scrollToSection(event, "top")}>
           <span className="brand-mark"><b>SG</b></span>
-          <span className="brand-name">Shruthi <strong>GowriShankar</strong></span>
+          <span className="brand-name">Shruthi <strong>Gowri Shankar</strong></span>
         </a>
         <button
           className="menu-button"
@@ -315,7 +323,7 @@ function App() {
           <button className="theme-toggle" type="button" onClick={() => setTheme((current) => current === "light" ? "dark" : "light")} aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`} title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
             {theme === "light" ? <FiMoon aria-hidden="true" /> : <FiSun aria-hidden="true" />}
           </button>
-          <button className="nav-resume" type="button" onClick={() => setResumeOpen(true)}>Résumé <span>↗</span></button>
+          <button className="nav-resume" type="button" onClick={() => setResumeOpen(true)}>Resume <span>↗</span></button>
         </div>
       </header>
 
@@ -326,18 +334,21 @@ function App() {
           <Label light>Performance Marketer · Meta & Google Ads</Label>
           <h1>Paid social & search that turns budget into growth.</h1>
           <p>5 years running paid media for luxury hospitality, real estate and e-commerce brands, consistently landing 3.1x+ ROAS through relentless, data-led optimisation.</p>
-          <div className="hero-depth" aria-hidden="true">
-            <div className="depth-card depth-card--left">
-              <span>ROAS</span>
-              <strong>3.1x</strong>
-              <small>Consistent growth</small>
-            </div>
-            <div className="depth-orb"><span>+</span></div>
-            <div className="depth-card depth-card--right">
-              <span>Campaigns</span>
-              <strong>500+</strong>
-              <small>Ads scaled</small>
-            </div>
+          <div className="hero-motion" aria-hidden="true">
+            <div className="motion-orbit motion-orbit--outer"><i /><i /><i /></div>
+            <div className="motion-orbit motion-orbit--inner"><i /><i /></div>
+            <svg className="motion-path" viewBox="0 0 560 120" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="motionStroke" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stopColor="#338bd2" stopOpacity="0" />
+                  <stop offset=".4" stopColor="#54a9ef" />
+                  <stop offset="1" stopColor="#7cc7ff" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+              <path className="motion-path__ghost" d="M8 93 C82 90 102 73 153 79 S235 99 287 58 S367 70 416 36 S492 42 552 12" />
+              <path className="motion-path__active" d="M8 93 C82 90 102 73 153 79 S235 99 287 58 S367 70 416 36 S492 42 552 12" />
+            </svg>
+            <div className="motion-core"><span>↗</span><small>Growth</small></div>
           </div>
           <div className="hero-actions">
             <a className="button button--primary" href="mailto:shruthi.official.09@gmail.com">Get in touch</a>
@@ -560,7 +571,7 @@ function App() {
           </div>
         </section>
 
-        <section className="contact reveal" id="contact">
+        <footer className="contact reveal" id="contact">
           <div className="contact-orbit contact-orbit--one" />
           <div className="contact-orbit contact-orbit--two" />
           <div className="contact-inner">
@@ -593,11 +604,16 @@ function App() {
               </a>
             </div>
           </div>
-        </section>
+          <div className="contact-footer-bar">
+            <span>© {new Date().getFullYear()} Shruthi GowriShankar</span>
+            <span>Performance marketing · Strategy · Growth</span>
+            <a href="#top" onClick={(event) => scrollToSection(event, "top")}>Back to top ↑</a>
+          </div>
+        </footer>
       </main>
 
       <button
-        className="connect-tab"
+        className={`connect-tab${contactVisible ? " connect-tab--hidden" : ""}`}
         type="button"
         aria-haspopup="dialog"
         aria-expanded={connectOpen}
@@ -690,7 +706,7 @@ function App() {
             <div className="resume-icon" aria-hidden="true">PDF</div>
             <Label>Résumé</Label>
             <h2 id="resume-title">How would you like to open it?</h2>
-            <p>Preview Shruthi’s résumé in a new browser tab or save a PDF copy to your device.</p>
+            <p>Preview Shruthi’s resume in a new browser tab or save a PDF copy to your device.</p>
             <div className="resume-actions">
               <a className="resume-option resume-option--primary" href="/uploads/Shruthi_Gowri_Shankar_Resume.pdf" target="_blank" rel="noreferrer" onClick={() => setResumeOpen(false)}>
                 <span>View in browser</span><small>Opens in a new tab</small><b>↗</b>
