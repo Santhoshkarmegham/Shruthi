@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+@font-face{font-family:none}
+body{margin:0}
+a{color:oklch(58% 0.13 250);text-decoration:none}
+a:hover{color:oklch(48% 0.13 250)}
+::selection{background:oklch(58% 0.13 250);color:white}
+</style>
+</helmet>
+
+<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:oklch(98% 0.004 90);color:oklch(22% 0.01 260);width:100%;overflow-x:hidden">
+
+<!-- NAV -->
+<div style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;background:oklch(98% 0.004 90 / 0.85);backdrop-filter:blur(8px);border-bottom:1px solid oklch(90% 0.005 90)">
+  <div style="font-weight:700;font-size:17px;letter-spacing:-0.01em">Shruthi GowriShankar</div>
+  <div style="display:flex;gap:32px;font-size:14px;font-weight:500">
+    <a href="#about" style="color:oklch(35% 0.01 260)">About</a>
+    <a href="#experience" style="color:oklch(35% 0.01 260)">Experience</a>
+    <a href="#work" style="color:oklch(35% 0.01 260)">Work</a>
+    <a href="#skills" style="color:oklch(35% 0.01 260)">Skills</a>
+    <a href="#contact" style="color:oklch(35% 0.01 260)">Contact</a>
+  </div>
+  
+</div>
+
+<!-- HERO -->
+<div style="background:oklch(20% 0.015 260);color:oklch(96% 0.005 90);padding:120px 48px 90px;display:flex;flex-direction:column;align-items:center;text-align:center">
+  <div style="font-size:13px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:oklch(70% 0.1 250);margin-bottom:22px">Performance Marketer · Meta &amp; Google Ads</div>
+  <h1 style="font-size:64px;line-height:1.05;font-weight:700;letter-spacing:-0.03em;margin:0 0 22px;max-width:820px">Paid social &amp; search that turns budget into growth.</h1>
+  <p style="font-size:19px;line-height:1.6;color:oklch(80% 0.01 260);max-width:640px;margin:0 0 40px">5 years running paid media for luxury hospitality, real estate and e-commerce brands, consistently landing 3.1x+ ROAS through relentless, data-led optimisation.</p>
+  <div style="display:flex;gap:14px;margin-bottom:64px">
+    <a href="mailto:shruthi.official.09@gmail.com" style="font-size:15px;font-weight:600;padding:14px 28px;border-radius:100px;background:oklch(58% 0.13 250);color:white">Get in touch</a>
+    <a href="https://www.linkedin.com/in/shruthi-gowrishankar/" target="_blank" style="font-size:15px;font-weight:600;padding:14px 28px;border-radius:100px;border:1px solid oklch(45% 0.01 260);color:oklch(96% 0.005 90)">View LinkedIn</a>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;width:100%;max-width:920px;border-top:1px solid oklch(35% 0.01 260)">
+    <sc-for list="{{ heroStats }}" as="stat" hint-placeholder-count="4">
+      <div style="padding:28px 12px 0;border-right:1px solid oklch(35% 0.01 260)">
+        <div style="font-size:34px;font-weight:700;color:oklch(70% 0.1 250)">{{ stat.value }}</div>
+        <div style="font-size:13px;color:oklch(72% 0.01 260);margin-top:6px">{{ stat.label }}</div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" style="padding:100px 48px;display:grid;grid-template-columns:0.8fr 1.2fr;gap:64px;max-width:1180px;margin:0 auto;align-items:start">
+  <div style="position:sticky;top:100px">
+    <div style="font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:oklch(58% 0.13 250);margin-bottom:16px">About</div>
+    <h2 style="font-size:34px;font-weight:700;letter-spacing:-0.02em;margin:0;line-height:1.15">Organic can only take you so far.</h2>
+  </div>
+  <div style="font-size:18px;line-height:1.8;color:oklch(30% 0.01 260)">
+    <p style="margin:0 0 20px">I'm Shruthi, I help companies build paid social experiences that actually move the needle. I started out helping small businesses with social media out of pure passion, and now I run paid strategy across Meta and Google for brands spanning luxury hospitality, real estate, retail and e-commerce.</p>
+    <p style="margin:0 0 20px">My focus is paid social and search strategy: building audiences, testing relentlessly, and translating performance data into decisions that grow revenue. I care about telling brand stories that resonate at scale, and backing every creative bet with a number.</p>
+    <p style="margin:0">Based in Ipswich, UK. MSc International Marketing Management from the University of Leeds, and a background in Computer Science &amp; Engineering that keeps me comfortable in the data.</p>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div id="experience" style="background:oklch(96% 0.006 90);padding:100px 48px">
+  <div style="max-width:1180px;margin:0 auto">
+    <div style="font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:oklch(58% 0.13 250);margin-bottom:16px">Experience</div>
+    <h2 style="font-size:34px;font-weight:700;letter-spacing:-0.02em;margin:0 0 56px">Where the results happened</h2>
+    <sc-for list="{{ experience }}" as="job" hint-placeholder-count="4">
+      <div style="display:grid;grid-template-columns:260px 1fr;gap:40px;padding:36px 0;border-top:1px solid oklch(88% 0.006 90)">
+        <div>
+          <div style="font-size:20px;font-weight:700;margin-bottom:4px">{{ job.role }}</div>
+          <div style="font-size:15px;font-weight:600;color:oklch(58% 0.13 250);margin-bottom:8px">{{ job.company }}</div>
+          <div style="font-size:13px;color:oklch(50% 0.01 260)">{{ job.dates }}</div>
+          <div style="font-size:13px;color:oklch(50% 0.01 260)">{{ job.location }}</div>
+        </div>
+        <div>
+          <sc-for list="{{ job.bullets }}" as="b" hint-placeholder-count="3">
+            <div style="display:flex;gap:12px;margin-bottom:12px;font-size:16px;line-height:1.6;color:oklch(30% 0.01 260)">
+              <div style="flex:none;width:6px;height:6px;border-radius:50%;background:oklch(58% 0.13 250);margin-top:10px"></div>
+              <div>{{ b }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+
+<!-- FEATURED WORK -->
+<div id="work" style="padding:100px 48px;max-width:1180px;margin:0 auto">
+  <div style="font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:oklch(58% 0.13 250);margin-bottom:16px">Featured Work</div>
+  
+  <div style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center">
+    <img src="uploads/1669478292609.jpeg" alt="Crowd at a mall brand activation event organised as part of Shruthi's social media strategy work" style="width:100%;border-radius:12px;display:block;box-shadow:0 20px 50px -20px oklch(20% 0.01 260 / 0.35)">
+    <div>
+      <div style="font-size:22px;font-weight:700;margin-bottom:14px">Express Avenue — Korean Fair</div>
+      <p style="font-size:16px;line-height:1.75;color:oklch(30% 0.01 260);margin:0 0 20px">Led paid social strategy for a culturally themed retail event celebrating Korean lifestyle, beauty and tourism — spanning Meta, Pinterest, Snapchat and LinkedIn with segmented creative, geo-targeting, influencer partnerships and a branded hashtag push (#KWaveChennai, #KoreaAtEA).</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px 28px;padding-top:8px;border-top:1px solid oklch(90% 0.005 90)">
+        <div><div style="font-size:26px;font-weight:700;color:oklch(58% 0.13 250)">100K+</div><div style="font-size:13px;color:oklch(50% 0.01 260);margin-top:4px">visitors across 4 days</div></div>
+        <div><div style="font-size:26px;font-weight:700;color:oklch(58% 0.13 250)">32%</div><div style="font-size:13px;color:oklch(50% 0.01 260);margin-top:4px">increase in weekend revenue for mall retailers</div></div>
+        <div><div style="font-size:26px;font-weight:700;color:oklch(58% 0.13 250)">200K+</div><div style="font-size:13px;color:oklch(50% 0.01 260);margin-top:4px">organic video views</div></div>
+        <div><div style="font-size:26px;font-weight:700;color:oklch(58% 0.13 250)">4.8%</div><div style="font-size:13px;color:oklch(50% 0.01 260);margin-top:4px">average CTR, outperforming industry benchmarks</div></div>
+      </div>
+
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:0.9fr 1.1fr;gap:56px;align-items:center;margin-top:64px">
+    <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="preferred-hotels-1" style="width:100%;height:280px" shape="rounded" radius="12" placeholder="Drop a Preferred Hotels &amp; Resorts campaign image" hint-size="100%,280px"></x-import>
+    <div>
+      <div style="font-size:22px;font-weight:700;margin-bottom:14px">Preferred Hotels &amp; Resorts — Meta Account Restructure</div>
+      <p style="font-size:16px;line-height:1.75;color:oklch(30% 0.01 260);margin:0 0 20px">Rebuilt the Meta ads account structure, consolidating fragmented campaigns, tightening audience segmentation and refreshing creative testing cadence, to improve delivery efficiency and lift qualified bookings.</p>
+      <div style="display:flex;gap:32px;flex-wrap:wrap">
+        <div><div style="font-size:26px;font-weight:700;color:oklch(58% 0.13 250)">3.4%</div><div style="font-size:13px;color:oklch(50% 0.01 260)">CTR</div></div>
+        <div><div style="font-size:26px;font-weight:700;color:oklch(58% 0.13 250)">120+</div><div style="font-size:13px;color:oklch(50% 0.01 260)">bookings</div></div>
+        <div><div style="font-size:26px;font-weight:700;color:oklch(58% 0.13 250)">20%</div><div style="font-size:13px;color:oklch(50% 0.01 260)">increase in bookings</div></div>
+        <div><div style="font-size:26px;font-weight:700;color:oklch(58% 0.13 250)">15%</div><div style="font-size:13px;color:oklch(50% 0.01 260)">lower CPA</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div id="skills" style="background:oklch(20% 0.015 260);color:oklch(96% 0.005 90);padding:100px 48px">
+  <div style="max-width:1180px;margin:0 auto">
+    <div style="font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:oklch(70% 0.1 250);margin-bottom:16px">Skills</div>
+    <h2 style="font-size:34px;font-weight:700;letter-spacing:-0.02em;margin:0 0 48px;color:oklch(96% 0.005 90)">Tools &amp; Platforms</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px">
+      <sc-for list="{{ skillGroups }}" as="group" hint-placeholder-count="2">
+        <div>
+          <div style="font-size:15px;font-weight:700;margin-bottom:18px;color:oklch(75% 0.01 260)">{{ group.title }}</div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <sc-for list="{{ group.items }}" as="item" hint-placeholder-count="6">
+              <div style="font-size:14px;font-weight:500;padding:9px 16px;border-radius:100px;border:1px solid oklch(40% 0.01 260);color:oklch(90% 0.005 90)">{{ item }}</div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+
+<!-- EDUCATION & CERTS -->
+<div style="padding:100px 48px;max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px">
+  <div>
+    <div style="font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:oklch(58% 0.13 250);margin-bottom:16px">Education</div>
+    <sc-for list="{{ education }}" as="ed" hint-placeholder-count="2">
+      <div style="margin-bottom:28px">
+        <div style="font-size:18px;font-weight:700">{{ ed.degree }}</div>
+        <div style="font-size:15px;color:oklch(58% 0.13 250);font-weight:600;margin-top:4px">{{ ed.school }}</div>
+        <div style="font-size:13px;color:oklch(50% 0.01 260);margin-top:4px">{{ ed.dates }}</div>
+      </div>
+    </sc-for>
+  </div>
+  <div>
+    <div style="font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:oklch(58% 0.13 250);margin-bottom:16px">Certifications</div>
+    <sc-for list="{{ certifications }}" as="c" hint-placeholder-count="4">
+      <div style="display:flex;gap:12px;margin-bottom:16px;font-size:15px;line-height:1.5;color:oklch(30% 0.01 260)">
+        <div style="flex:none;width:6px;height:6px;border-radius:50%;background:oklch(58% 0.13 250);margin-top:8px"></div>
+        <div>{{ c }}</div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" style="background:oklch(96% 0.006 90);padding:110px 48px;text-align:center">
+  <h2 style="font-size:40px;font-weight:700;letter-spacing:-0.02em;margin:0 0 18px">Let's grow something together.</h2>
+  <p style="font-size:17px;color:oklch(40% 0.01 260);margin:0 0 36px">Open to advertising executive roles and freelance paid-media projects.</p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:40px">
+    <a href="mailto:shruthi.official.09@gmail.com" style="font-size:15px;font-weight:600;padding:14px 28px;border-radius:100px;background:oklch(22% 0.01 260);color:white">shruthi.official.09@gmail.com</a>
+    <a href="tel:+447769454403" style="font-size:15px;font-weight:600;padding:14px 28px;border-radius:100px;border:1px solid oklch(75% 0.01 260);color:oklch(22% 0.01 260)">+44 7769 454403</a>
+  </div>
+  <div style="font-size:14px;color:oklch(50% 0.01 260)">Ipswich, United Kingdom · <a href="https://www.linkedin.com/in/shruthi-gowrishankar/" target="_blank">LinkedIn</a></div>
+</div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;resumeHref&quot;: {&quot;editor&quot;: null, &quot;default&quot;: &quot;uploads/Shruthi_Gowri_Shankar_Resume.pdf&quot;, &quot;tsType&quot;: &quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      resumeHref: this.props.resumeHref ?? 'uploads/Shruthi_Gowri_Shankar_Resume.pdf',
+      heroStats: [
+        { value: '3.1x+', label: 'Average ROAS' },
+        { value: '45%', label: 'Higher reach' },
+        { value: '24%', label: 'Higher engagement' },
+        { value: '38%', label: 'More leads' }
+      ],
+      experience: [
+        {
+          role: 'Advertising Executive', company: 'Crafted', dates: 'Sept 2025 \u2013 Present', location: 'Ipswich, UK',
+          bullets: [
+            'Managed paid media for 5 high-profile clients across luxury hospitality, real estate and e-commerce with budgets up to \u00a3100,000, achieving an average 3:1 ROAS and beating KPIs by 12%.',
+            "Scaled 500+ ads across Search Ads 360, Google Studio and Meta for Preferred Hotels & Resorts, automating 70 hours of quarterly data entry and cutting errors by 30%.",
+            "Ran 10+ structured A/B tests for MUJI Europe's Instagram, lifting reach 45%, engagement 24% and cutting cost by 11%.",
+            'Grew Google Search impression share to 73.5% and CTR from 5.2% to 25.21% on a \u00a360,000+ budget.'
+          ]
+        },
+        {
+          role: 'Meta Ads Consultant', company: 'Arctic Bee', dates: 'Jan 2025 \u2013 Mar 2025', location: 'Leeds, UK',
+          bullets: [
+            'Launched 15+ targeted Meta lead-gen campaigns, driving a 38% increase in leads within 8 weeks.',
+            'Built and tested 10+ custom and lookalike audiences, improving CTR by 19%.',
+            'Increased ROAS from 2.1x to 3.5x while cutting cost per lead by 22%.'
+          ]
+        },
+        {
+          role: 'Digital Marketing Specialist', company: 'Express Infrastructure', dates: 'Dec 2021 \u2013 Feb 2023', location: 'Chennai, India',
+          bullets: [
+            'Directed social strategy for 3 brands (mall, hotel, residential complex), growing followers 62% and engagement 45%.',
+            'Managed 100+ paid campaigns across Instagram, Facebook, LinkedIn and Google, driving a 32% revenue increase and 48% more qualified leads.'
+          ]
+        },
+        {
+          role: 'Social Media Marketing Consultant', company: 'Kipling Cafe', dates: 'Jun 2021 \u2013 Jan 2022', location: 'Chennai, India',
+          bullets: [
+            'Grew Instagram reach 58% and post shares 31% through a refreshed content strategy.',
+            'Lifted average engagement rate from 3.2% to 5.4%, responding to 200+ messages and comments monthly.'
+          ]
+        }
+      ],
+      skillGroups: [
+        { title: 'Paid Channels & Platforms', items: ['Paid Search', 'Paid Social', 'Google Ads', 'Google Marketing Platform', 'Search Ads 360', 'Meta Ads Manager', 'Meta Commerce Manager'] },
+        { title: 'Analytics & Reporting', items: ['Advanced Excel', 'Google Analytics 4', 'In-Platform Campaign Data Analytics and Reports', 'A/B Testing'] }
+      ],
+      education: [
+        { degree: 'MSc International Marketing Management', school: 'University of Leeds', dates: 'Sept 2023 \u2013 Dec 2024' },
+        { degree: 'B.Tech Computer Science & Engineering', school: 'SRM Institute of Science and Technology', dates: 'Jul 2017 \u2013 Jul 2021' }
+      ],
+      certifications: [
+        'Meta Certified Digital Marketing Associate \u2014 2025',
+        'Meta Social Media Marketing Professional Certificate',
+        'Microsoft Office Specialist: Excel Associate'
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
