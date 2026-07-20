@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { FaAward, FaBuildingColumns, FaGraduationCap } from "react-icons/fa6";
+import { FiBarChart2, FiCalendar, FiCheckCircle, FiGitBranch, FiSearch, FiShare2, FiShoppingBag } from "react-icons/fi";
+import { RiFileExcel2Fill } from "react-icons/ri";
+import { SiGoogleads, SiGoogleanalytics, SiGooglemarketingplatform, SiMeta } from "react-icons/si";
 
 const heroStats = [
   ["3.1x+", "Average ROAS"],
@@ -107,6 +111,37 @@ function Metrics({ items }) {
   );
 }
 
+function SkillGroupIcon({ index }) {
+  return index === 0 ? (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 6h16v12H4z"/><path d="m8 15 3-3-3-3M13 15h3"/>
+    </svg>
+  ) : (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5 19V9M12 19V5M19 19v-7"/><path d="M3 19h18"/>
+    </svg>
+  );
+}
+
+const toolIcons = {
+  "Paid Search": [FiSearch, "search"],
+  "Paid Social": [FiShare2, "social"],
+  "Google Ads": [SiGoogleads, "google"],
+  "Google Marketing Platform": [SiGooglemarketingplatform, "google"],
+  "Search Ads 360": [SiGoogleads, "google"],
+  "Meta Ads Manager": [SiMeta, "meta"],
+  "Meta Commerce Manager": [FiShoppingBag, "meta"],
+  "Advanced Excel": [RiFileExcel2Fill, "excel"],
+  "Google Analytics 4": [SiGoogleanalytics, "analytics"],
+  "In-Platform Campaign Data Analytics and Reports": [FiBarChart2, "analytics"],
+  "A/B Testing": [FiGitBranch, "testing"],
+};
+
+function ToolIcon({ name }) {
+  const [Icon, tone] = toolIcons[name] ?? [FiBarChart2, "default"];
+  return <i className={`tool-icon tool-icon--${tone}`}><Icon aria-hidden="true" /></i>;
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [connectOpen, setConnectOpen] = useState(false);
@@ -156,6 +191,35 @@ function App() {
   }, []);
 
   useEffect(() => {
+    const cards = [...document.querySelectorAll(".tilt-card")];
+    const onMove = (event) => {
+      const card = event.currentTarget;
+      const bounds = card.getBoundingClientRect();
+      const x = (event.clientX - bounds.left) / bounds.width;
+      const y = (event.clientY - bounds.top) / bounds.height;
+      card.style.setProperty("--tilt-x", `${(0.5 - y) * 7}deg`);
+      card.style.setProperty("--tilt-y", `${(x - 0.5) * 8}deg`);
+      card.style.setProperty("--light-x", `${x * 100}%`);
+      card.style.setProperty("--light-y", `${y * 100}%`);
+    };
+    const onLeave = (event) => {
+      event.currentTarget.style.removeProperty("--tilt-x");
+      event.currentTarget.style.removeProperty("--tilt-y");
+      event.currentTarget.style.removeProperty("--light-x");
+      event.currentTarget.style.removeProperty("--light-y");
+    };
+
+    cards.forEach((card) => {
+      card.addEventListener("pointermove", onMove);
+      card.addEventListener("pointerleave", onLeave);
+    });
+    return () => cards.forEach((card) => {
+      card.removeEventListener("pointermove", onMove);
+      card.removeEventListener("pointerleave", onLeave);
+    });
+  }, []);
+
+  useEffect(() => {
     document.body.style.overflow = connectOpen || resumeOpen ? "hidden" : "";
     const closeOnEscape = (event) => {
       if (event.key === "Escape") {
@@ -196,8 +260,8 @@ function App() {
       <div className="scroll-progress" style={{ width: `${scrollProgress}%` }} />
       <header className="nav">
         <a className="brand" href="#top" onClick={(event) => scrollToSection(event, "top")}>
-          <span className="brand-mark">S</span>
-          <span>Shruthi GowriShankar</span>
+          <span className="brand-mark"><b>SG</b></span>
+          <span className="brand-name">Shruthi <strong>GowriShankar</strong></span>
         </a>
         <button
           className="menu-button"
@@ -247,7 +311,7 @@ function App() {
           </div>
           <div className="hero-actions">
             <a className="button button--primary" href="mailto:shruthi.official.09@gmail.com">Get in touch</a>
-            <a className="button button--outline" href="https://www.linkedin.com/in/shruthi-gowrishankar/" target="_blank" rel="noreferrer">View LinkedIn</a>
+            <a className="button button--outline" href="#work" onClick={(event) => scrollToSection(event, "work")}>View my work <span>↓</span></a>
           </div>
           <div className="hero-stats">
             {heroStats.map(([value, label]) => (
@@ -260,12 +324,31 @@ function App() {
         <section className="section about reveal" id="about">
           <div className="section-intro">
             <Label>About</Label>
-            <h2>Organic can only take you so far.</h2>
+            <h2>Paid media, built around meaningful growth.</h2>
+            <p className="about-intro">Strategy, creative testing and performance insight brought together with commercial focus.</p>
+            <div className="about-mini-stats">
+              <div><strong>5</strong><span>Years in digital marketing</span></div>
+              <div><strong>3.1x+</strong><span>Average campaign ROAS</span></div>
+            </div>
           </div>
           <div className="about-copy">
-            <p>I'm Shruthi, I help companies build paid social experiences that actually move the needle. I started out helping small businesses with social media out of pure passion, and now I run paid strategy across Meta and Google for brands spanning luxury hospitality, real estate, retail and e-commerce.</p>
-            <p>My focus is paid social and search strategy: building audiences, testing relentlessly, and translating performance data into decisions that grow revenue. I care about telling brand stories that resonate at scale, and backing every creative bet with a number.</p>
-            <p>Based in Ipswich, UK. MSc International Marketing Management from the University of Leeds, and a background in Computer Science & Engineering that keeps me comfortable in the data.</p>
+            <div className="about-card">
+              <p>I'm Shruthi, a <mark>performance marketer</mark> helping brands turn paid media into measurable growth. I lead strategy across <mark>Meta and Google</mark> for luxury hospitality, real estate, retail and e-commerce businesses.</p>
+              <p>My approach combines purposeful audience design, disciplined creative testing and clear performance analysis. Every campaign starts with a commercial objective and every optimisation is backed by evidence.</p>
+              <div className="about-skills" aria-label="Core capabilities">
+                <span>Paid Social</span><span>Paid Search</span><span>Campaign Strategy</span><span>Creative Testing</span><span>Performance Analytics</span>
+              </div>
+              <div className="about-credentials">
+                <article>
+                  <span className="credential-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-5 9 5-9 5z"/><path d="M7 12v5c3 2 7 2 10 0v-5M21 9v6"/></svg></span>
+                  <div><small>Postgraduate degree</small><strong>MSc International Marketing Management</strong><span>University of Leeds</span></div>
+                </article>
+                <article>
+                  <span className="credential-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 9 4 12l4 3M16 9l4 3-4 3M14 6l-4 12"/></svg></span>
+                  <div><small>Technical foundation</small><strong>Computer Science & Engineering</strong><span>Data-comfortable by design</span></div>
+                </article>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -277,7 +360,7 @@ function App() {
             </div>
             <div className="service-grid">
               {services.map((service) => (
-                <article className="service-card" key={service.title}>
+                <article className="service-card tilt-card" key={service.title}>
                   <span className="service-number">{service.number}</span>
                   <h3>{service.title}</h3>
                   <p>{service.description}</p>
@@ -293,13 +376,26 @@ function App() {
             <Label>Experience</Label>
             <h2>Where the results happened</h2>
             <div className="experience-list">
-              {experience.map((job) => (
+              {experience.map((job, index) => (
                 <article className="job" key={`${job.company}-${job.role}`}>
                   <div className="job-heading">
-                    <h3>{job.role}</h3>
+                    <div className="job-title-row">
+                      <span className="job-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M4 8h16v11H4z"/><path d="M9 8V5h6v3M4 12h16M10 12v2h4v-2"/></svg>
+                      </span>
+                      <div><small>0{index + 1}</small><h3>{job.role}</h3></div>
+                    </div>
                     <strong>{job.company}</strong>
-                    <span>{job.dates}</span>
-                    <span>{job.location}</span>
+                    <div className="job-meta">
+                      <span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="6" width="16" height="14" rx="2"/><path d="M8 3v6M16 3v6M4 10h16"/></svg>
+                        {job.dates}
+                      </span>
+                      <span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                        {job.location}
+                      </span>
+                    </div>
                   </div>
                   <ul>{job.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
                 </article>
@@ -314,7 +410,7 @@ function App() {
             <h2>Campaigns built to perform.</h2>
             <p>Selected work combining audience insight, creative testing and commercial results.</p>
           </div>
-          <article className="case-study">
+          <article className="case-study tilt-card">
             <div className="case-image">
               <img src="/uploads/1669478292609.jpeg" alt="Crowd at a mall brand activation event" />
             </div>
@@ -324,7 +420,7 @@ function App() {
               <Metrics items={[["100K+", "visitors across 4 days"], ["32%", "increase in weekend revenue for mall retailers"], ["200K+", "organic video views"], ["4.8%", "average CTR, outperforming industry benchmarks"]]} />
             </div>
           </article>
-          <article className="case-study case-study--reverse">
+          <article className="case-study case-study--reverse tilt-card">
             <div className="case-image case-image--hotel">
               <img src="/uploads/preferred-hotels.webp" alt="Preferred Hotels and Resorts luxury campaign" />
             </div>
@@ -344,7 +440,7 @@ function App() {
             </div>
             <div className="process-grid">
               {processSteps.map(([title, description], index) => (
-                <article className="process-step" key={title}>
+                <article className="process-step tilt-card" key={title}>
                   <span>0{index + 1}</span><h3>{title}</h3><p>{description}</p>
                 </article>
               ))}
@@ -357,10 +453,20 @@ function App() {
             <Label light>Skills</Label>
             <h2>Tools & Platforms</h2>
             <div className="skill-groups">
-              {skillGroups.map((group) => (
-                <div key={group.title}>
-                  <h3>{group.title}</h3>
-                  <div className="pills">{group.items.map((item) => <span key={item}>{item}</span>)}</div>
+              {skillGroups.map((group, index) => (
+                <div className="tilt-card" key={group.title}>
+                  <div className="skill-title">
+                    <span><SkillGroupIcon index={index} /></span>
+                    <h3>{group.title}</h3>
+                  </div>
+                  <div className="pills">
+                    {group.items.map((item) => (
+                      <span key={item}>
+                        <ToolIcon name={item} />
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
@@ -368,29 +474,81 @@ function App() {
         </section>
 
         <section className="section container education reveal">
-          <div>
-            <Label>Education</Label>
-            {education.map(([degree, school, dates]) => (
-              <article key={degree}><h3>{degree}</h3><strong>{school}</strong><span>{dates}</span></article>
+          <div className="education-column">
+            <div className="education-heading">
+              <span><FaGraduationCap aria-hidden="true" /></span>
+              <div><Label>Education</Label><h2>Academic foundation</h2></div>
+            </div>
+            <div className="education-list">
+            {education.map(([degree, school, dates], index) => (
+              <article className="education-card" key={degree}>
+                <span className="education-number">0{index + 1}</span>
+                <div className="education-degree-icon"><FaGraduationCap aria-hidden="true" /></div>
+                <div className="education-card-copy">
+                  <h3>{degree}</h3>
+                  <strong><FaBuildingColumns aria-hidden="true" />{school}</strong>
+                  <span><FiCalendar aria-hidden="true" />{dates}</span>
+                </div>
+              </article>
             ))}
+            </div>
           </div>
-          <div>
-            <Label>Certifications</Label>
-            <ul>{certifications.map((certification) => <li key={certification}>{certification}</li>)}</ul>
+          <div className="education-column">
+            <div className="education-heading">
+              <span><FaAward aria-hidden="true" /></span>
+              <div><Label>Certifications</Label><h2>Professional credentials</h2></div>
+            </div>
+            <div className="certification-list">
+              {certifications.map((certification) => {
+                const isExcel = certification.includes("Excel");
+                return (
+                  <article className="certification-card" key={certification}>
+                    <span className={`certification-brand${isExcel ? " certification-brand--excel" : ""}`}>
+                      {isExcel ? <RiFileExcel2Fill aria-hidden="true" /> : <SiMeta aria-hidden="true" />}
+                    </span>
+                    <div><small>{isExcel ? "Microsoft" : "Meta"}</small><strong>{certification}</strong></div>
+                    <FiCheckCircle className="certification-check" aria-label="Credential" />
+                  </article>
+                );
+              })}
+            </div>
           </div>
         </section>
 
         <section className="contact reveal" id="contact">
           <div className="contact-orbit contact-orbit--one" />
           <div className="contact-orbit contact-orbit--two" />
-          <h2>Let's grow something together.</h2>
-          <p>Open to advertising executive roles and freelance paid-media projects.</p>
-          <div className="availability"><i /> Available for selected opportunities</div>
-          <div className="contact-actions">
-            <a className="button button--dark" href="mailto:shruthi.official.09@gmail.com">shruthi.official.09@gmail.com</a>
-            <a className="button button--phone" href="tel:+447769454403">+44 7769 454403</a>
+          <div className="contact-inner">
+            <div className="contact-dots" aria-hidden="true"><i /><i /><i /></div>
+            <div className="contact-symbol" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 6.5h16v11H4z"/><path d="m5 7.5 7 5.5 7-5.5"/></svg>
+            </div>
+            <Label>Start a conversation</Label>
+            <h2>Let's grow something together.</h2>
+            <p>Open to advertising executive roles and freelance paid-media projects.</p>
+            <div className="availability"><i /> Available for selected opportunities</div>
+            <div className="contact-actions">
+              <a className="contact-action contact-action--primary" href="mailto:shruthi.official.09@gmail.com">
+                <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.75 5.75h16.5v12.5H3.75z"/><path d="m4.5 6.5 7.5 6 7.5-6"/></svg></span>
+                <div><small>Email me</small><strong>shruthi.official.09@gmail.com</strong></div>
+                <b>↗</b>
+              </a>
+              <a className="contact-action" href="tel:+447769454403">
+                <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.1 3.8 4.8 5.2c-.7.4-.9 1.3-.6 2 2.7 6.2 6.4 9.9 12.6 12.6.7.3 1.6.1 2-.6l1.4-2.3-4.6-2.2-1.2 1.5c-2.8-1.3-5.3-3.8-6.6-6.6l1.5-1.2z"/></svg></span>
+                <div><small>Call me</small><strong>+44 7769 454403</strong></div>
+                <b>↗</b>
+              </a>
+            </div>
+            <div className="contact-meta">
+              <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>Ipswich, United Kingdom</span>
+              <a href="https://www.linkedin.com/in/shruthi-gowrishankar/" target="_blank" rel="noreferrer">
+                <svg className="linkedin-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12Zm1.78 13.02H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/>
+                </svg>
+                LinkedIn <b>↗</b>
+              </a>
+            </div>
           </div>
-          <span>Ipswich, United Kingdom · <a href="https://www.linkedin.com/in/shruthi-gowrishankar/" target="_blank" rel="noreferrer">LinkedIn</a></span>
         </section>
       </main>
 
@@ -460,7 +618,19 @@ function App() {
                 <button className="button button--primary form-submit" type="submit" disabled={formStatus === "sending"}>
                   {formStatus === "sending" ? "Sending…" : "Send message"}
                 </button>
-                <small>Or email <a href="mailto:shruthi.official.09@gmail.com">shruthi.official.09@gmail.com</a></small>
+                <div className="quick-contact" aria-label="Other ways to connect">
+                  <span>Or connect directly</span>
+                  <div>
+                    <a href="mailto:shruthi.official.09@gmail.com" aria-label="Send an email">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.75 5.75h16.5v12.5H3.75z"/><path d="m4.5 6.5 7.5 6 7.5-6"/></svg>
+                      <small>Email</small>
+                    </a>
+                    <a href="tel:+447769454403" aria-label="Call Shruthi">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.1 3.8 4.8 5.2c-.7.4-.9 1.3-.6 2 2.7 6.2 6.4 9.9 12.6 12.6.7.3 1.6.1 2-.6l1.4-2.3-4.6-2.2-1.2 1.5c-2.8-1.3-5.3-3.8-6.6-6.6l1.5-1.2z"/></svg>
+                      <small>Call</small>
+                    </a>
+                  </div>
+                </div>
               </form>
             )}
           </section>
