@@ -354,7 +354,11 @@ function App() {
         <section className="section about reveal" id="about">
           <div className="section-intro">
             <Label>About</Label>
-            <h2>Paid media, built around meaningful growth.</h2>
+            <h2 className="about-title" aria-label="Paid media, built around meaningful growth.">
+              <span>Organic can</span>
+              <span>only take you</span>
+              <em>so far</em>
+            </h2>
             <p className="about-intro">Strategy, creative testing and performance insight brought together with commercial focus.</p>
             <div className="about-mini-stats">
               <div><strong>5</strong><span>Years in digital marketing</span></div>
@@ -363,8 +367,8 @@ function App() {
           </div>
           <div className="about-copy">
             <div className="about-card">
-              <p>I'm Shruthi, a <mark>performance marketer</mark> helping brands turn paid media into measurable growth. I lead strategy across <mark>Meta and Google</mark> for luxury hospitality, real estate, retail and e-commerce businesses.</p>
-              <p>My approach combines purposeful audience design, disciplined creative testing and clear performance analysis. Every campaign starts with a commercial objective and every optimisation is backed by evidence.</p>
+              <p>I'm Shruthi, I help companies build paid social experiences that actually move the needle. I started out helping small businesses with social media out of pure passion, and now I run paid strategy across Meta and Google for brands spanning luxury hospitality, real estate, retail and e-commerce.
+            My focus is paid social and search strategy: building audiences, testing relentlessly, and translating performance data into decisions that grow revenue. I care about telling brand stories that resonate at scale, and backing every creative bet with a number.</p>
               <div className="about-skills" aria-label="Core capabilities">
                 <span>Paid Social</span><span>Paid Search</span><span>Campaign Strategy</span><span>Creative Testing</span><span>Performance Analytics</span>
               </div>
@@ -566,8 +570,7 @@ function App() {
             </div>
             <Label>Start a conversation</Label>
             <h2>Let's grow something together.</h2>
-            <p>Open to advertising executive roles and freelance paid-media projects.</p>
-            <div className="availability"><i /> Available for selected opportunities</div>
+            <p>Open to paid advertising roles.</p>
             <div className="contact-actions">
               <a className="contact-action contact-action--primary" href="mailto:shruthi.official.09@gmail.com">
                 <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.75 5.75h16.5v12.5H3.75z"/><path d="m4.5 6.5 7.5 6 7.5-6"/></svg></span>

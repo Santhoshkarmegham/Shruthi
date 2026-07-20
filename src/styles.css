@@ -143,6 +143,29 @@ h1, h2, h3, p { margin-top: 0; }
 .about { display: grid; grid-template-columns: .8fr 1.2fr; align-items: start; gap: 64px; width: min(100% - 96px, 1180px); margin-inline: auto; }
 .section-intro { position: sticky; top: 100px; }
 .section-intro h2 { margin-bottom: 0; }
+.about-title {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  max-width: 510px;
+  font-size: clamp(40px, 4.2vw, 60px) !important;
+  font-weight: 800;
+  line-height: .98 !important;
+  letter-spacing: -.055em !important;
+  text-wrap: balance;
+}
+.about-title span { display: block; }
+.about-title em {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 3px 0;
+  color: transparent;
+  background: linear-gradient(105deg, oklch(54% .17 255), oklch(66% .15 225));
+  background-clip: text;
+  -webkit-background-clip: text;
+  font-style: normal;
+  font-weight: 850;
+}
 .about-intro { max-width: 360px; margin: 22px 0 30px; color: oklch(47% .01 260); font-size: 15px; line-height: 1.65; }
 .about-mini-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 390px; }
 .about-mini-stats div { display: flex; flex-direction: column; padding: 16px; border: 1px solid oklch(87% .012 250); border-radius: 13px; background: oklch(97% .01 250); }
@@ -309,8 +332,6 @@ h1, h2, h3, p { margin-top: 0; }
 .contact-inner > .eyebrow { margin-bottom: 13px; }
 .contact h2 { margin-bottom: 14px; font-size: clamp(34px, 4.5vw, 48px); letter-spacing: -.035em; }
 .contact-inner > p { margin-bottom: 34px; color: oklch(40% 0.01 260); font-size: 17px; }
-.availability { display: inline-flex; align-items: center; gap: 9px; margin: -16px 0 30px; padding: 7px 12px; border: 1px solid oklch(80% .05 145); border-radius: 999px; color: oklch(38% .08 145); background: oklch(96% .025 145); font-size: 12px; font-weight: 700; }
-.availability i { width: 7px; height: 7px; border-radius: 50%; background: oklch(62% .14 145); box-shadow: 0 0 0 4px oklch(62% .12 145 / .12); }
 .contact-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; margin: 0 auto 30px; }
 .contact-action { position: relative; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 13px; min-width: 0; padding: 15px 17px; border: 1px solid oklch(84% .012 250); border-radius: 14px; color: var(--dark); text-align: left; background: white; transition: transform .2s, border-color .2s, box-shadow .2s; }
 .contact-action:hover { border-color: var(--blue); color: var(--dark); transform: translateY(-3px); box-shadow: 0 18px 34px -25px oklch(20% .08 250 / .55); }
@@ -463,6 +484,11 @@ h1, h2, h3, p { margin-top: 0; }
 :root[data-theme="dark"] :is(.about-intro, .about-mini-stats span, .split-heading > p, .experience-header > p, .experience-summary span, .job-meta span, .job li, .work-heading p, .case-study p, .case-metrics span, .process-step p, .education-card-copy > span, .contact-inner > p, .contact-meta, .connect-panel > p, .connect-form small, .resume-panel > p) { color: oklch(72% .012 250); }
 :root[data-theme="dark"] :is(.about-card p, .service-card p, .job h3, .case-study h3, .process-step h3, .education-card h3, .certification-card strong, .contact h2, .connect-panel h2, .resume-panel h2) { color: oklch(93% .006 250); }
 :root[data-theme="dark"] .about-card mark { color: oklch(83% .09 250); background: oklch(29% .055 250); }
+:root[data-theme="dark"] .about-title em {
+  background: linear-gradient(105deg, oklch(76% .13 250), oklch(80% .11 220));
+  background-clip: text;
+  -webkit-background-clip: text;
+}
 :root[data-theme="dark"] :is(.about-skills span, .job-highlights span) { color: oklch(78% .075 250); border-color: oklch(42% .045 250); background: oklch(25% .035 250); }
 :root[data-theme="dark"] .experience-summary div { border-color: oklch(34% .018 250); }
 :root[data-theme="dark"] .case-image { background: oklch(24% .02 250); }
@@ -507,6 +533,7 @@ h1, h2, h3, p { margin-top: 0; }
 }
 
 @media (max-width: 640px) {
+  .about-title { max-width: 100%; font-size: clamp(37px, 12vw, 50px) !important; }
   .container, .about { width: min(100% - 40px, 560px); }
   .nav { top: 0; right: 0; left: 0; grid-template-columns: 1fr auto; min-height: 62px; padding-inline: 20px; border-radius: 0; }
   .brand { font-size: 15px; }
