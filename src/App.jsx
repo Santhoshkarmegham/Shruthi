@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaAward, FaBuildingColumns, FaGraduationCap } from "react-icons/fa6";
-import { FiBarChart2, FiCalendar, FiCheckCircle, FiGitBranch, FiSearch, FiShare2, FiShoppingBag } from "react-icons/fi";
+import { FiBarChart2, FiCalendar, FiCheckCircle, FiGitBranch, FiMoon, FiSearch, FiShare2, FiShoppingBag, FiSun } from "react-icons/fi";
 import { RiFileExcel2Fill } from "react-icons/ri";
 import { SiGoogleads, SiGoogleanalytics, SiGooglemarketingplatform, SiMeta } from "react-icons/si";
 
@@ -17,6 +17,7 @@ const experience = [
     company: "Crafted",
     dates: "Sept 2025 – Present",
     location: "Ipswich, UK",
+    highlights: ["£100K+ budgets", "500+ ads scaled", "25.21% CTR"],
     bullets: [
       "Managed paid media for 5 high-profile clients across luxury hospitality, real estate and e-commerce with budgets up to £100,000, achieving an average 3:1 ROAS and beating KPIs by 12%.",
       "Scaled 500+ ads across Search Ads 360, Google Studio and Meta for Preferred Hotels & Resorts, automating 70 hours of quarterly data entry and cutting errors by 30%.",
@@ -29,6 +30,7 @@ const experience = [
     company: "Arctic Bee",
     dates: "Jan 2025 – Mar 2025",
     location: "Leeds, UK",
+    highlights: ["3.5x ROAS", "38% more leads", "22% lower CPL"],
     bullets: [
       "Launched 15+ targeted Meta lead-gen campaigns, driving a 38% increase in leads within 8 weeks.",
       "Built and tested 10+ custom and lookalike audiences, improving CTR by 19%.",
@@ -40,6 +42,7 @@ const experience = [
     company: "Express Infrastructure",
     dates: "Dec 2021 – Feb 2023",
     location: "Chennai, India",
+    highlights: ["32% revenue growth", "48% more leads", "100+ campaigns"],
     bullets: [
       "Directed social strategy for 3 brands (mall, hotel, residential complex), growing followers 62% and engagement 45%.",
       "Managed 100+ paid campaigns across Instagram, Facebook, LinkedIn and Google, driving a 32% revenue increase and 48% more qualified leads.",
@@ -50,6 +53,7 @@ const experience = [
     company: "Kipling Cafe",
     dates: "Jun 2021 – Jan 2022",
     location: "Chennai, India",
+    highlights: ["58% more reach", "5.4% engagement", "31% more shares"],
     bullets: [
       "Grew Instagram reach 58% and post shares 31% through a refreshed content strategy.",
       "Lifted average engagement rate from 3.2% to 5.4%, responding to 200+ messages and comments monthly.",
@@ -149,6 +153,7 @@ function App() {
   const [formStatus, setFormStatus] = useState("idle");
   const [activeSection, setActiveSection] = useState("about");
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [theme, setTheme] = useState("light");
 
   const closeMenu = () => setMenuOpen(false);
   const scrollToSection = (event, sectionId) => {
@@ -156,11 +161,31 @@ function App() {
     const target = document.getElementById(sectionId);
     if (!target) return;
     const navHeight = document.querySelector(".nav")?.offsetHeight ?? 72;
-    const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
-    window.scrollTo({ top, behavior: "smooth" });
+    const start = window.scrollY;
+    const top = Math.max(0, target.getBoundingClientRect().top + start - navHeight);
+    const distance = top - start;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const duration = Math.min(950, Math.max(500, Math.abs(distance) * 0.42));
+    const startedAt = performance.now();
+    const ease = (value) => value < 0.5 ? 4 * value ** 3 : 1 - ((-2 * value + 2) ** 3) / 2;
+
+    if (reduceMotion) window.scrollTo(0, top);
+    else {
+      const animate = (now) => {
+        const progress = Math.min(1, (now - startedAt) / duration);
+        window.scrollTo(0, start + distance * ease(progress));
+        if (progress < 1) window.requestAnimationFrame(animate);
+      };
+      window.requestAnimationFrame(animate);
+    }
     window.history.replaceState(null, "", `#${sectionId}`);
     closeMenu();
   };
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+  }, [theme]);
 
   useEffect(() => {
     const updateScroll = () => {
@@ -286,7 +311,12 @@ function App() {
           ))}
           <button className="mobile-resume" type="button" onClick={() => { setResumeOpen(true); closeMenu(); }}>View résumé</button>
         </nav>
-        <button className="nav-resume" type="button" onClick={() => setResumeOpen(true)}>Résumé <span>↗</span></button>
+        <div className="nav-actions">
+          <button className="theme-toggle" type="button" onClick={() => setTheme((current) => current === "light" ? "dark" : "light")} aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`} title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
+            {theme === "light" ? <FiMoon aria-hidden="true" /> : <FiSun aria-hidden="true" />}
+          </button>
+          <button className="nav-resume" type="button" onClick={() => setResumeOpen(true)}>Résumé <span>↗</span></button>
+        </div>
       </header>
 
       <main id="top">
@@ -373,11 +403,19 @@ function App() {
 
         <section className="section section--tinted reveal" id="experience">
           <div className="container">
-            <Label>Experience</Label>
-            <h2>Where the results happened</h2>
+            <div className="experience-header">
+              <div><Label>Experience</Label><h2>Where strategy became measurable growth.</h2></div>
+              <p>A career built across agency, consultancy and in-house environments—turning complex paid-media accounts into focused, scalable performance systems.</p>
+            </div>
+            <div className="experience-summary" aria-label="Experience summary">
+              <div><strong>4</strong><span>Performance roles</span></div>
+              <div><strong>500+</strong><span>Ads scaled</span></div>
+              <div><strong>£100K+</strong><span>Managed budgets</span></div>
+              <div><strong>3.5x</strong><span>Peak ROAS</span></div>
+            </div>
             <div className="experience-list">
               {experience.map((job, index) => (
-                <article className="job" key={`${job.company}-${job.role}`}>
+                <article className="job tilt-card" key={`${job.company}-${job.role}`}>
                   <div className="job-heading">
                     <div className="job-title-row">
                       <span className="job-icon" aria-hidden="true">
@@ -397,7 +435,10 @@ function App() {
                       </span>
                     </div>
                   </div>
-                  <ul>{job.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
+                  <div className="job-content">
+                    <div className="job-highlights">{job.highlights.map((highlight) => <span key={highlight}>{highlight}</span>)}</div>
+                    <ul>{job.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
+                  </div>
                 </article>
               ))}
             </div>
