@@ -319,7 +319,7 @@ function App() {
               {link}
             </a>
           ))}
-          <button className="mobile-resume" type="button" onClick={() => { setResumeOpen(true); closeMenu(); }}>View résumé</button>
+          <button className="mobile-resume" type="button" onClick={() => { setResumeOpen(true); closeMenu(); }}>View resume</button>
         </nav>
         <div className="nav-actions">
           <button className="theme-toggle" type="button" onClick={() => setTheme((current) => current === "light" ? "dark" : "light")} aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`} title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
@@ -469,16 +469,6 @@ function App() {
             <p>Selected work combining audience insight, creative testing and commercial results.</p>
           </div>
           <article className="case-study tilt-card">
-            <div className="case-image">
-              <img src="/uploads/1669478292609.jpeg" alt="Crowd at a mall brand activation event" />
-            </div>
-            <div>
-              <h3>Express Avenue — Korean Fair</h3>
-              <p>Led paid social strategy for a culturally themed retail event celebrating Korean lifestyle, beauty and tourism — spanning Meta, Pinterest, Snapchat and LinkedIn with segmented creative, geo-targeting, influencer partnerships and a branded hashtag push (#KWaveChennai, #KoreaAtEA).</p>
-              <Metrics items={[["100K+", "visitors across 4 days"], ["32%", "increase in weekend revenue for mall retailers"], ["200K+", "organic video views"], ["4.8%", "average CTR, outperforming industry benchmarks"]]} />
-            </div>
-          </article>
-          <article className="case-study case-study--reverse tilt-card">
             <div className="case-image case-image--hotel">
               <img src="/uploads/preferred-hotels.webp" alt="Preferred Hotels and Resorts luxury campaign" />
             </div>
@@ -486,6 +476,16 @@ function App() {
               <h3>Preferred Hotels & Resorts — Meta Account Restructure</h3>
               <p>Rebuilt the Meta ads account structure, consolidating fragmented campaigns, tightening audience segmentation and refreshing creative testing cadence, to improve delivery efficiency and lift qualified bookings.</p>
               <Metrics items={[["3.4%", "CTR"], ["120+", "bookings"], ["20%", "increase in bookings"], ["15%", "lower CPA"]]} />
+            </div>
+          </article>
+          <article className="case-study case-study--reverse tilt-card">
+            <div className="case-image">
+              <img src="/uploads/1669478292609.jpeg" alt="Crowd at a mall brand activation event" />
+            </div>
+            <div>
+              <h3>Express Avenue — Korean Fair</h3>
+              <p>Led paid social strategy for a culturally themed retail event celebrating Korean lifestyle, beauty and tourism — spanning Meta, Pinterest, Snapchat and LinkedIn with segmented creative, geo-targeting, influencer partnerships and a branded hashtag push (#KWaveChennai, #KoreaAtEA).</p>
+              <Metrics items={[["100K+", "visitors across 4 days"], ["32%", "increase in weekend revenue for mall retailers"], ["200K+", "organic video views"], ["4.8%", "average CTR, outperforming industry benchmarks"]]} />
             </div>
           </article>
         </section>
@@ -704,9 +704,9 @@ function App() {
           if (event.target === event.currentTarget) setResumeOpen(false);
         }}>
           <section className="resume-panel" role="dialog" aria-modal="true" aria-labelledby="resume-title">
-            <button className="connect-close" type="button" aria-label="Close résumé options" onClick={() => setResumeOpen(false)}>×</button>
+            <button className="connect-close" type="button" aria-label="Close resume options" onClick={() => setResumeOpen(false)}>×</button>
             <div className="resume-icon" aria-hidden="true">PDF</div>
-            <Label>Résumé</Label>
+            <Label>Resume</Label>
             <h2 id="resume-title">How would you like to open it?</h2>
             <p>View Shruthi’s resume directly in your browser or save a PDF copy to your device.</p>
             <div className="resume-actions">
@@ -729,15 +729,15 @@ function App() {
             <header className="resume-viewer-header">
               <div>
                 <span className="resume-viewer-badge">PDF</span>
-                <div><strong id="resume-viewer-title">Shruthi GowriShankar — Résumé</strong><small>Browser preview</small></div>
+                <div><strong id="resume-viewer-title">Shruthi GowriShankar — Resume</strong><small>Browser preview</small></div>
               </div>
               <div className="resume-viewer-actions">
                 <a href="/uploads/Shruthi_Gowri_Shankar_Resume.pdf" download="Shruthi_Gowri_Shankar_Resume.pdf">Download <span>↓</span></a>
                 <a href="/uploads/Shruthi_Gowri_Shankar_Resume.pdf" target="_blank" rel="noreferrer">New tab <span>↗</span></a>
-                <button type="button" aria-label="Close résumé preview" onClick={() => setResumePreviewOpen(false)}>×</button>
+                <button type="button" aria-label="Close resume preview" onClick={() => setResumePreviewOpen(false)}>×</button>
               </div>
             </header>
-            <iframe src="/uploads/Shruthi_Gowri_Shankar_Resume.pdf#view=FitH" title="Shruthi GowriShankar résumé PDF preview" />
+            <iframe src="/uploads/Shruthi_Gowri_Shankar_Resume.pdf#view=FitH" title="Shruthi GowriShankar resume PDF preview" />
           </section>
         </div>
       )}
