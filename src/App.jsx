@@ -17,10 +17,10 @@ const experience = [
     company: "Crafted",
     dates: "Sept 2025 – Present",
     location: "Ipswich, UK",
-    highlights: ["£100K+ budgets", "500+ ads scaled", "25.21% CTR"],
+    highlights: ["£400K+ budgets", "100+ ads scaled", "25.21% CTR"],
     bullets: [
       "Managed paid media for 5 high-profile clients across luxury hospitality, real estate and e-commerce with budgets up to £100,000, achieving an average 3:1 ROAS and beating KPIs by 12%.",
-      "Scaled 500+ ads across Search Ads 360, Google Studio and Meta for Preferred Hotels & Resorts, automating 70 hours of quarterly data entry and cutting errors by 30%.",
+      "Scaled 100+ ads across Search Ads 360, Google Studio and Meta for Preferred Hotels & Resorts, automating 70 hours of quarterly data entry and cutting errors by 30%.",
       "Ran 10+ structured A/B tests for MUJI Europe's Instagram, lifting reach 45%, engagement 24% and cutting cost by 11%.",
       "Grew Google Search impression share to 73.5% and CTR from 5.2% to 25.21% on a £60,000+ budget.",
     ],
@@ -426,8 +426,8 @@ function App() {
             </div>
             <div className="experience-summary" aria-label="Experience summary">
               <div><strong>4</strong><span>Performance roles</span></div>
-              <div><strong>500+</strong><span>Ads scaled</span></div>
-              <div><strong>£100K+</strong><span>Managed budgets</span></div>
+              <div><strong>100+</strong><span>Ads scaled</span></div>
+              <div><strong>£400K+</strong><span>Managed budgets</span></div>
               <div><strong>3.5x</strong><span>Peak ROAS</span></div>
             </div>
             <div className="experience-list">
